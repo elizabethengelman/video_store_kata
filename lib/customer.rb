@@ -13,22 +13,26 @@ class Customer
   end
 
   def statement
-    frequent_renter_points = 0
     result = "Rental Record for #{@name}\n"
     @rentals.each do |rental|
       rental_charge = rental.amount_to_charge
-      frequent_renter_points += rental.get_frequent_renter_points
       result += "\t" + rental.movie.title + "\t" + rental_charge.to_s + "\n"
     end
 
     result += "Amount owed is #{get_total_amount(@rentals)}\n"
-    result += "You earned #{frequent_renter_points} frequent renter points"
+    result += "You earned #{get_total_frequent_renter_points(@rentals)} frequent renter points"
     result
   end
 
   def get_total_amount(rentals)
     rentals.map(&:amount_to_charge).reduce(0) do |sum, amount|
       sum + amount
+    end
+  end
+
+  def get_total_frequent_renter_points(rentals)
+    rentals.map(&:get_frequent_renter_points).reduce(0) do |sum, points|
+      sum + points
     end
   end
 
