@@ -25,4 +25,13 @@ class Movie
     end
     this_amount
   end
+
+  def frequent_renter_points(days_rented)
+    points = 1
+    # add bonus for a two day new release rental
+    if price_code == NEW_RELEASE && days_rented > 1
+      points += 1
+    end
+    points
+  end
 end
