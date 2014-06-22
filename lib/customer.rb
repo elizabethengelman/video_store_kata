@@ -17,7 +17,7 @@ class Customer
     result = "Rental Record for #{@name}\n"
     @rentals.each do |rental|
       rental_charge = rental.amount_to_charge
-      frequent_renter_points = rental.get_frequent_renter_points
+      frequent_renter_points += rental.get_frequent_renter_points
       result += "\t" + rental.movie.title + "\t" + rental_charge.to_s + "\n"
     end
 
