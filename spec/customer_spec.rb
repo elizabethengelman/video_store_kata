@@ -33,6 +33,15 @@ describe Customer do
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
+
+    it "calculate the total frequent renter points and amount if there are multiple rentals for a customer" do
+      @movie2 = Movie.new("Snow White", Movie::REGULAR)
+      @rental1 = Rental.new(@movie, 1)
+      @rental2 = Rental.new(@movie2, 1)
+      @customer.add_rental(@rental1)
+      @customer.add_rental(@rental2)
+      @customer.statement.should == expected_statement_with_several_movies
+    end
   end
 
   context "a new release" do
@@ -42,7 +51,7 @@ describe Customer do
 
     it "returns a statement for 1 new release movie for 1 day" do
       expected_statement = create_test_statement(Movie::NEW_RELEASE, 3, 1, 1)
-      @rental = Rental.new(@movie, 1)
+      @rental = Rental.new(@movie, Movie::NEW_RELEASE)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
@@ -77,9 +86,18 @@ describe Customer do
   end
 
   def create_test_statement(movie_type, amount_owed, days_rented, frequent_renter_points)
-    expected_statement = "Rental Record for Elizabeth\n" +
-                         "\tThe Little Mermaid\t#{amount_owed}\n" +
-                         "Amount owed is #{amount_owed}\n" +
-                         "You earned #{frequent_renter_points} frequent renter points"
+    "Rental Record for Elizabeth\n" +
+    "\tThe Little Mermaid\t#{amount_owed}\n" +
+    "Amount owed is #{amount_owed}\n" +
+    "You earned #{frequent_renter_points} frequent renter points"
   end
+
+  def expected_statement_with_several_movies
+    "Rental Record for Elizabeth\n" +
+    "\tThe Little Mermaid\t2\n" +
+    "\tSnow White\t2\n" +
+    "Amount owed is 4\n" +
+    "You earned 2 frequent renter points"
+  end
+
 end
