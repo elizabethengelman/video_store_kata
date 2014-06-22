@@ -15,7 +15,7 @@ class Customer
   def statement
     result = "Rental Record for #{@name}\n"
     @rentals.each do |rental|
-      rental_charge = rental.amount_to_charge
+      rental_charge = rental.get_charge
       result += "\t" + rental.movie.title + "\t" + rental_charge.to_s + "\n"
     end
 
@@ -25,7 +25,7 @@ class Customer
   end
 
   def get_total_amount(rentals)
-    rentals.map(&:amount_to_charge).reduce(0) do |sum, amount|
+    rentals.map(&:get_charge).reduce(0) do |sum, amount|
       sum + amount
     end
   end
