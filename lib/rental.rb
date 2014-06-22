@@ -20,4 +20,13 @@ class Rental
     end
     this_amount
   end
+
+  def get_frequent_renter_points
+    points = 1
+    # add bonus for a two day new release rental
+    if @movie.price_code == Movie::NEW_RELEASE && @days_rented > 1
+      points += 1
+    end
+    points
+  end
 end
