@@ -21,14 +21,14 @@ describe Customer do
     end
 
     it "returns a statement for 1 regular movie for 1 day" do
-      expected_statement = create_test_statement(Movie::REGULAR, 2, 1, 1)
+      expected_statement = create_test_statement(2, 1)
       @rental = Rental.new(@movie, 1)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
 
     it "charges more for a regular movie that is rented for more than 2 days" do
-      expected_statement = create_test_statement(Movie::REGULAR, 3.5, 3, 1)
+      expected_statement = create_test_statement(3.5, 1)
       @rental = Rental.new(@movie, 3)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
@@ -50,14 +50,14 @@ describe Customer do
     end
 
     it "returns a statement for 1 new release movie for 1 day" do
-      expected_statement = create_test_statement(Movie::NEW_RELEASE, 3, 1, 1)
+      expected_statement = create_test_statement(3, 1)
       @rental = Rental.new(@movie, Movie::NEW_RELEASE)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
 
     it "adds 1 more frequent renter point for New Releases rented for more than a day" do
-      expected_statement = create_test_statement(Movie::NEW_RELEASE, 6, 2, 2)
+      expected_statement = create_test_statement(6, 2)
       @rental = Rental.new(@movie, 2)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
@@ -70,7 +70,7 @@ describe Customer do
     end
 
     it "returns a statment for 1 childrens movie for 1 day" do
-      expected_statement = create_test_statement(Movie::CHILDRENS, 2, 1, 1)
+      expected_statement = create_test_statement(2, 1)
       @rental = Rental.new(@movie, 1)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
@@ -78,14 +78,14 @@ describe Customer do
 
 
     it "charges extra if a childrens movie is rented for more than 3 days" do
-      expected_statement = create_test_statement(Movie::CHILDRENS, 3.5, 1, 1)
+      expected_statement = create_test_statement(3.5, 1)
       @rental = Rental.new(@movie, 4)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
   end
 
-  def create_test_statement(movie_type, amount_owed, days_rented, frequent_renter_points)
+  def create_test_statement(amount_owed, frequent_renter_points)
     "Rental Record for Elizabeth\n" +
     "\tThe Little Mermaid\t#{amount_owed}\n" +
     "Amount owed is #{amount_owed}\n" +
