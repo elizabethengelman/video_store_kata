@@ -6,32 +6,58 @@ class Movie
   attr_reader :title
   attr_accessor :price_code
 
-  def initialize(title, price_code)
+  def initialize(title, price)
     @title = title
-    @price_code = price_code
+    @price = price
   end
 
   def amount_to_charge(days_rented)
-    this_amount = 0
-    case price_code
-    when REGULAR
-      this_amount += 2
-      this_amount += (days_rented - 2) * 1.5 if days_rented > 2
-    when NEW_RELEASE
-      this_amount += days_rented * 3
-    when CHILDRENS
-      this_amount += 2
-      this_amount += (days_rented - 3) * 1.5 if days_rented > 3
+    @price.charge(days_rented)
+  end
+
+  def frequent_renter_points(days_rented)
+    @price.frequent_renter_points(days_rented)
+  end
+end
+
+class RegularPrice
+  def charge(days_rented)
+    amount = 2
+    if days_rented > 2
+      amount += (days_rented - 2) * 1.5
     end
-    this_amount
+   amount
+  end
+
+  def frequent_renter_points(days_rented)
+    1
+  end
+end
+
+class NewReleasePrice
+  def charge(days_rented)
+    days_rented * 3
   end
 
   def frequent_renter_points(days_rented)
     points = 1
-    # add bonus for a two day new release rental
-    if price_code == NEW_RELEASE && days_rented > 1
+    if days_rented > 1
       points += 1
     end
     points
+  end
+end
+
+class ChildrensPrice
+  def charge(days_rented)
+    amount = 2
+    if days_rented > 3
+      amount += (days_rented - 3) * 1.5
+    end
+   amount
+  end
+
+  def frequent_renter_points(days_rented)
+    1
   end
 end

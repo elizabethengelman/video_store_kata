@@ -17,7 +17,7 @@ describe Customer do
 
   context "a regular movie" do
     before(:each) do
-      @movie = Movie.new("The Little Mermaid", Movie::REGULAR)
+      @movie = Movie.new("The Little Mermaid", RegularPrice.new)
     end
 
     it "returns a statement for 1 regular movie for 1 day" do
@@ -35,7 +35,7 @@ describe Customer do
     end
 
     it "calculate the total frequent renter points and amount if there are multiple rentals for a customer" do
-      @movie2 = Movie.new("Snow White", Movie::REGULAR)
+      @movie2 = Movie.new("Snow White", RegularPrice.new)
       @rental1 = Rental.new(@movie, 1)
       @rental2 = Rental.new(@movie2, 1)
       @customer.add_rental(@rental1)
@@ -46,12 +46,12 @@ describe Customer do
 
   context "a new release" do
     before(:each) do
-      @movie = Movie.new("The Little Mermaid", Movie::NEW_RELEASE)
+      @movie = Movie.new("The Little Mermaid", NewReleasePrice.new)
     end
 
     it "returns a statement for 1 new release movie for 1 day" do
       expected_statement = create_test_statement(3, 1)
-      @rental = Rental.new(@movie, Movie::NEW_RELEASE)
+      @rental = Rental.new(@movie, 1)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
@@ -66,7 +66,7 @@ describe Customer do
 
   context "a childrens movie" do
     before(:each) do
-      @movie = Movie.new("The Little Mermaid", Movie::CHILDRENS)
+      @movie = Movie.new("The Little Mermaid", ChildrensPrice.new)
     end
 
     it "returns a statment for 1 childrens movie for 1 day" do
@@ -99,5 +99,4 @@ describe Customer do
     "Amount owed is 4\n" +
     "You earned 2 frequent renter points"
   end
-
 end
