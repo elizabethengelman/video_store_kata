@@ -46,7 +46,7 @@ describe Customer do
   context "a new release" do
     it "returns a statement for 1 new release movie for 1 day" do
       expected_statement = create_test_statement(3, 1)
-      @rental = Rental.new(@new_release, Movie::NEW_RELEASE)
+      @rental = Rental.new(@new_release, 1)
       @customer.add_rental(@rental)
       @customer.statement.should == expected_statement
     end
