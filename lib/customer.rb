@@ -1,5 +1,3 @@
-require 'pry'
-
 class Customer
   attr_reader :name
 
@@ -15,8 +13,7 @@ class Customer
   def statement
     result = "Rental Record for #{@name}\n"
     @rentals.each do |rental|
-      rental_charge = rental.get_charge
-      result += "\t" + rental.movie.title + "\t" + rental_charge.to_s + "\n"
+      result += "\t" + rental.movie.title + "\t" + rental.get_charge.to_s + "\n"
     end
 
     result += "Amount owed is #{get_total_amount(@rentals)}\n"
