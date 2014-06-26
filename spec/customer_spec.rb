@@ -9,7 +9,7 @@ describe Customer do
     @regular_movie1 = Movie.new("The Little Mermaid", RegularPrice.new)
     @regular_movie2 = Movie.new("Frozen", RegularPrice.new)
     @new_release = Movie.new("The Little Mermaid", NewReleasePrice.new)
-    @childrens_movie = Movie.new("The Little Mermaid", Movie::CHILDRENS)
+    @childrens_movie = Movie.new("The Little Mermaid", ChildrensMoviePrice.new)
   end
 
   it "returns an empty statement if the customer has no rentals" do
