@@ -6,8 +6,8 @@ require 'rental'
 describe Customer do
   before(:each) do
     @customer = Customer.new("Elizabeth")
-    @regular_movie1 = Movie.new("The Little Mermaid", Movie::REGULAR)
-    @regular_movie2 = Movie.new("Frozen", Movie::REGULAR)
+    @regular_movie1 = Movie.new("The Little Mermaid", RegularPrice.new)
+    @regular_movie2 = Movie.new("Frozen", RegularPrice.new)
     @new_release = Movie.new("The Little Mermaid", Movie::NEW_RELEASE)
     @childrens_movie = Movie.new("The Little Mermaid", Movie::CHILDRENS)
   end
