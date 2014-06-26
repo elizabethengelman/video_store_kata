@@ -12,20 +12,11 @@ class Movie
   end
 
   def get_charge(days_rented)
-    this_amount = 0
-    if (@price_code.is_a? RegularPrice) || (@price_code.is_a? NewReleasePrice) || (@price_code.is_a? ChildrensMoviePrice)
-      this_amount += @price_code.get_charge(days_rented)
-    end
-    this_amount
+    @price_code.get_charge(days_rented)
   end
 
   def get_frequent_renter_points(days_rented)
-    frequent_renter_points = 1
-    # add bonus for a two day new release rental
-    if(@price_code.is_a? NewReleasePrice) && days_rented > 1
-      frequent_renter_points += 1
-    end
-    frequent_renter_points
+    @price_code.get_frequent_renter_points(days_rented)
   end
 end
 
@@ -53,6 +44,7 @@ class NewReleasePrice
     if days_rented > 1
       frequent_renter_points += 1
     end
+    frequent_renter_points
   end
 end
 
