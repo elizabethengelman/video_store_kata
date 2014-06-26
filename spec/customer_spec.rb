@@ -8,7 +8,7 @@ describe Customer do
     @customer = Customer.new("Elizabeth")
     @regular_movie1 = Movie.new("The Little Mermaid", RegularPrice.new)
     @regular_movie2 = Movie.new("Frozen", RegularPrice.new)
-    @new_release = Movie.new("The Little Mermaid", Movie::NEW_RELEASE)
+    @new_release = Movie.new("The Little Mermaid", NewReleasePrice.new)
     @childrens_movie = Movie.new("The Little Mermaid", Movie::CHILDRENS)
   end
 
