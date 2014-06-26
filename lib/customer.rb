@@ -26,6 +26,5 @@ class Customer
     result += "You earned #{frequent_renter_points} frequent renter points"
     result
   end
-
 end
 
