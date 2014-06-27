@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Customer do
   before(:each) do
     @customer = Customer.new("Elizabeth")
-    @regular_movie1 = Movie.new("The Little Mermaid", RegularPrice.new)
-    @regular_movie2 = Movie.new("Frozen", RegularPrice.new)
+    @regular_movie1 = Movie.new("The Little Mermaid", Movie::REGULAR)
+    @regular_movie2 = Movie.new("Frozen", Movie::REGULAR)
     @new_release = Movie.new("The Little Mermaid", Movie::NEW_RELEASE)
-    @childrens_movie = Movie.new("The Little Mermaid", ChildrensMoviePrice.new)
+    @childrens_movie = Movie.new("The Little Mermaid", Movie::CHILDRENS)
   end
 
   it "returns an empty statement if the customer has no rentals" do
