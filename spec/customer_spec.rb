@@ -1,7 +1,4 @@
-require 'rspec'
-require 'customer'
-require 'movie'
-require 'rental'
+require 'spec_helper'
 
 describe Customer do
   before(:each) do
