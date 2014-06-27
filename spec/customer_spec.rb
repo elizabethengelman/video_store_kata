@@ -14,8 +14,8 @@ describe Customer do
 
   it "returns an empty statement if the customer has no rentals" do
     expected_empty_statement = "Rental Record for Elizabeth\n" +
-                         "Amount owed is 0\n" +
-                         "You earned 0 frequent renter points"
+                               "Amount owed is 0\n" +
+                               "You earned 0 frequent renter points"
     @customer.statement.should == expected_empty_statement
   end
 
@@ -90,5 +90,4 @@ describe Customer do
     "Amount owed is 4\n" +
     "You earned 2 frequent renter points"
   end
-
 end

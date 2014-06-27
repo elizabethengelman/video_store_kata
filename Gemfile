@@ -1,2 +1,3 @@
-gem 'guard'
-gem 'guard-rspec', require: false
+source 'https://rubygems.org'
+gem 'rb-fsevent'
+gem 'guard-rspec'
