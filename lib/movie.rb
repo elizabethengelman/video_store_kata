@@ -13,7 +13,7 @@ class Movie
 
   def get_charge(days_rented)
     this_amount = 0
-    case price_code
+    case @price_code
     when REGULAR
       this_amount += 2
       this_amount += (days_rented - 2) * 1.5 if days_rented > 2
